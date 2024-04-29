@@ -176,9 +176,9 @@ class Profiler : public SimObject
     std::vector<Stats::Scalar> m_lcacc_tlb_readmisses;
     std::vector<Stats::Scalar> m_lcacc_tlb_writehits;
     std::vector<Stats::Scalar> m_lcacc_tlb_writemisses;
+    std::vector<Stats::Scalar> m_lcacc_num_jobs;
+    std::vector<Stats::Scalar> m_lcacc_job_cycles;
     std::vector<Stats::Scalar> m_lcacc_num_tasks;
-    std::vector<Stats::Scalar> m_lcacc_task_cycles;
-    std::vector<Stats::Scalar> m_lcacc_num_actions;
     std::vector<Stats::Scalar> m_lcacc_read_cycles;
     std::vector<Stats::Scalar> m_lcacc_compute_cycles;
     std::vector<Stats::Scalar> m_lcacc_write_cycles;

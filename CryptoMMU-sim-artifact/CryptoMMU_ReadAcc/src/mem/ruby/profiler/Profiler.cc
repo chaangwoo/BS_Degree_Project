@@ -337,9 +337,9 @@ Profiler::regStats(const std::string &pName)
     m_lcacc_tlb_readmisses.resize(numAcc);
     m_lcacc_tlb_writehits.resize(numAcc);
     m_lcacc_tlb_writemisses.resize(numAcc);
+    m_lcacc_num_jobs.resize(numAcc);
+    m_lcacc_job_cycles.resize(numAcc);
     m_lcacc_num_tasks.resize(numAcc);
-    m_lcacc_task_cycles.resize(numAcc);
-    m_lcacc_num_actions.resize(numAcc);
     m_lcacc_read_cycles.resize(numAcc);
     m_lcacc_compute_cycles.resize(numAcc);
     m_lcacc_write_cycles.resize(numAcc);
@@ -398,15 +398,15 @@ Profiler::regStats(const std::string &pName)
         m_lcacc_tlb_writemisses[i]
             .name(pName + csprintf(".lcacc_%i.tlb_writemisses", i))
             .desc("Number of private TLB misses for the write requests");
+        m_lcacc_num_jobs[i]
+            .name(pName + csprintf(".lcacc_%i.num_jobs", i))
+            .desc("Number of jobs");
+        m_lcacc_job_cycles[i]
+            .name(pName + csprintf(".lcacc_%i.job_cycles", i))
+            .desc("cycles LCAcc has spent doing jobs");
         m_lcacc_num_tasks[i]
             .name(pName + csprintf(".lcacc_%i.num_tasks", i))
             .desc("Number of tasks");
-        m_lcacc_task_cycles[i]
-            .name(pName + csprintf(".lcacc_%i.task_cycles", i))
-            .desc("cycles LCAcc has spent doing tasks");
-        m_lcacc_num_actions[i]
-            .name(pName + csprintf(".lcacc_%i.num_actions", i))
-            .desc("Number of actions");
         m_lcacc_read_cycles[i]
             .name(pName + csprintf(".lcacc_%i.read_cycles", i))
             .desc("sum up the cycles of all read actions");
@@ -654,15 +654,15 @@ Profiler::collateStats()
         m_lcacc_tlb_readmisses[i]   = readmisses;
         m_lcacc_tlb_writehits[i]    = writehits;
         m_lcacc_tlb_writemisses[i]  = writemisses;
+        uint64_t numjobs        = LCAcc::SimicsInterface::manager.deviceSet.at(i)->getNumJobs();
+        uint64_t jobcycles      = LCAcc::SimicsInterface::manager.deviceSet.at(i)->getJobCycles();
         uint64_t numtasks       = LCAcc::SimicsInterface::manager.deviceSet.at(i)->getNumTasks();
-        uint64_t taskcycles     = LCAcc::SimicsInterface::manager.deviceSet.at(i)->getTaskCycles();
-        uint64_t numactions     = LCAcc::SimicsInterface::manager.deviceSet.at(i)->getNumActions();
         uint64_t readcycles     = LCAcc::SimicsInterface::manager.deviceSet.at(i)->getReadCycles();
         uint64_t computecycles  = LCAcc::SimicsInterface::manager.deviceSet.at(i)->getComputeCycles();
         uint64_t writecycles    = LCAcc::SimicsInterface::manager.deviceSet.at(i)->getWriteCycles();
+        m_lcacc_num_jobs[i]       = numjobs;
+        m_lcacc_job_cycles[i]     = jobcycles;
         m_lcacc_num_tasks[i]      = numtasks;
-        m_lcacc_task_cycles[i]    = taskcycles;
-        m_lcacc_num_actions[i]    = numactions;
         m_lcacc_read_cycles[i]    = readcycles;
         m_lcacc_compute_cycles[i] = computecycles;
         m_lcacc_write_cycles[i]   = writecycles;

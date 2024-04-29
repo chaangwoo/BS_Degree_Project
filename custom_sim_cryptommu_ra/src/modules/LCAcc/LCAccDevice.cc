@@ -75,7 +75,7 @@ LCAccDevice::EmitActionReads(Action* a)
         //       << " Task " << a->taskID);
       }
       // changed
-      numActions++;
+      numTasks++;
       actionTimeStamp[a] = SimicsInterface::GetSystemTime();
 
       if (pendingReadActions.empty()) {
@@ -553,7 +553,7 @@ LCAccDevice::StartTask()
     spm->Clear();
     lcaActive = false;
     // changed
-    taskCycles += SimicsInterface::GetSystemTime() - taskTimeStamp;
+    jobCycles += SimicsInterface::GetSystemTime() - jobTimeStamp;
     //
   }
 }
@@ -1203,8 +1203,8 @@ LCAccDevice::ParseTaskSignature(PacketReader& pr)
     //ML_LOG(GetDeviceName(), "Starting job "
     //       << skipTasks / numberOfTasks);
     // changed
-    taskTimeStamp = SimicsInterface::GetSystemTime();
-    numTasks++;
+    jobTimeStamp = SimicsInterface::GetSystemTime();
+    numJobs++;
     //
     StartTask();
   }
@@ -1403,9 +1403,9 @@ LCAccDevice::Initialize(uint32_t threadID)
   std::vector<int> m;
 
   // changed
+  numJobs = 0;
+  jobCycles = 0;
   numTasks = 0;
-  taskCycles = 0;
-  numActions = 0;
   readCycles = 0;
   computeCycles = 0;
   writeCycles = 0;

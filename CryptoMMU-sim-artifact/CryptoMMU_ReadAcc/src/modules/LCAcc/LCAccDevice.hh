@@ -195,11 +195,11 @@ class LCAccDevice
   int prefetchDistance;
   bool lcaActive;
   // changed
-  uint64_t numTasks;
-  uint64_t taskTimeStamp;
-  uint64_t taskCycles;
+  uint64_t numJobs;
+  uint64_t jobTimeStamp;
+  uint64_t jobCycles;
   std::map<Action*, uint64_t> actionTimeStamp;
-  uint64_t numActions;
+  uint64_t numTasks;
   uint64_t readCycles;
   uint64_t computeCycles;
   uint64_t writeCycles;
@@ -339,13 +339,13 @@ public:
     return dma;
   }
   // changed
-  uint64_t getNumTasks()
+  uint64_t getNumJobs()
   {
-    return numTasks;
+    return numJobs;
   }
-  uint64_t getTaskCycles()
+  uint64_t getJobCycles()
   {
-    return taskCycles;
+    return jobCycles;
   }
   uint64_t getReadCycles()
   {
@@ -359,9 +359,9 @@ public:
   {
     return writeCycles;
   }
-  uint64_t getNumActions()
+  uint64_t getNumTasks()
   {
-    return numActions;
+    return numTasks;
   }
   uint64_t getReadActionTime()
   {
