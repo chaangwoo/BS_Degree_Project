@@ -10,7 +10,7 @@
   - `archive/` consists of the simulation results (`stats.txt` files) of each benchmark
 
 - `custom_sim_cryptommu_ra/` is the customized directory with the baseline of `CryptoMMU-sim-artifact/CryptoMMU_ReadAcc/`
-  - `src/modules/LCAcc/DMAController.cc` and `src/modules/LCAcc/DMAController.hh` are the main differences
+  - `src/modules/LCAcc/DMAController.cc` and `src/modules/LCAcc/DMAController.hh` are the main differences to the baseline
   - `archive/non_stalling_mshr/` consists of the simulation results (`stats.txt` files) and corresponding `DMAController.*` files used for the simulation
   - `archive/stalling_mshr/` consists of the simulation results (`stats.txt` files) and corresponding `DMAController.*` files used for the simulation
 
