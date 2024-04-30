@@ -11,7 +11,7 @@
 
 - `custom_sim_cryptommu_ra/` is the customized directory with the baseline of `CryptoMMU-sim-artifact/CryptoMMU_ReadAcc/`
   - `src/modules/LCAcc/DMAController.cc` and `src/modules/LCAcc/DMAController.hh` are the main differences to the baseline
-  - `archive/non_stalling_mshr/` consists of the simulation results (`stats.txt` files) and corresponding `DMAController.*` files used for the simulation
+  - `archive/optimized_baseline/` consists of the simulation results (`stats.txt` files) and corresponding `DMAController.*` files used for the simulation
   - `archive/stalling_mshr/` consists of the simulation results (`stats.txt` files) and corresponding `DMAController.*` files used for the simulation
 
 # Benchmark Breakdown
@@ -51,7 +51,7 @@
 - Optimized the code to **prevent the redundant PTW** on the consecutive write misses
   - By checking MSHR in both *read miss* and the *write miss* cases, and allocate entry if possible
   - Do the PTW only when the MSHR is full
-- Comparing the statistics in the `CryptoMMU-sim-artifact/CryptoMMU_ReadAcc/archive/` and the `custom_sim_cryptommu_ra/archive/non_stalling_mshr`
+- Comparing the statistics in the `CryptoMMU-sim-artifact/CryptoMMU_ReadAcc/archive/` and the `custom_sim_cryptommu_ra/archive/optimized_baseline`
 yields that this optimization performs well in the *write miss-rich* benchmark (e.g. Denoise)
 
 ### Implement the *stall* mechanism to the MSHR
