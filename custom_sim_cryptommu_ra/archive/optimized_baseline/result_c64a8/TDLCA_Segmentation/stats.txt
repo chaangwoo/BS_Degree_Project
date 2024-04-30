@@ -2441,30 +2441,30 @@ system.ruby.lcacc_4.tlb_writemisses             70194                       # Nu
 system.ruby.lcacc_5.tlb_writemisses             73556                       # Number of private TLB misses for the write requests
 system.ruby.lcacc_6.tlb_writemisses             68411                       # Number of private TLB misses for the write requests
 system.ruby.lcacc_7.tlb_writemisses             71071                       # Number of private TLB misses for the write requests
-system.ruby.lcacc_0.num_tasks                     119                       # Number of tasks
-system.ruby.lcacc_1.num_tasks                     132                       # Number of tasks
-system.ruby.lcacc_2.num_tasks                     128                       # Number of tasks
-system.ruby.lcacc_3.num_tasks                     115                       # Number of tasks
-system.ruby.lcacc_4.num_tasks                     130                       # Number of tasks
-system.ruby.lcacc_5.num_tasks                     139                       # Number of tasks
-system.ruby.lcacc_6.num_tasks                     128                       # Number of tasks
-system.ruby.lcacc_7.num_tasks                     133                       # Number of tasks
-system.ruby.lcacc_0.task_cycles              11487439                       # cycles LCAcc has spent doing tasks
-system.ruby.lcacc_1.task_cycles              11503449                       # cycles LCAcc has spent doing tasks
-system.ruby.lcacc_2.task_cycles              11552703                       # cycles LCAcc has spent doing tasks
-system.ruby.lcacc_3.task_cycles              11500975                       # cycles LCAcc has spent doing tasks
-system.ruby.lcacc_4.task_cycles              11552215                       # cycles LCAcc has spent doing tasks
-system.ruby.lcacc_5.task_cycles              11566531                       # cycles LCAcc has spent doing tasks
-system.ruby.lcacc_6.task_cycles              11526360                       # cycles LCAcc has spent doing tasks
-system.ruby.lcacc_7.task_cycles              11497647                       # cycles LCAcc has spent doing tasks
-system.ruby.lcacc_0.num_actions                  1904                       # Number of actions
-system.ruby.lcacc_1.num_actions                  2112                       # Number of actions
-system.ruby.lcacc_2.num_actions                  2048                       # Number of actions
-system.ruby.lcacc_3.num_actions                  1840                       # Number of actions
-system.ruby.lcacc_4.num_actions                  2080                       # Number of actions
-system.ruby.lcacc_5.num_actions                  2224                       # Number of actions
-system.ruby.lcacc_6.num_actions                  2048                       # Number of actions
-system.ruby.lcacc_7.num_actions                  2128                       # Number of actions
+system.ruby.lcacc_0.num_jobs                      119                       # Number of jobs
+system.ruby.lcacc_1.num_jobs                      132                       # Number of jobs
+system.ruby.lcacc_2.num_jobs                      128                       # Number of jobs
+system.ruby.lcacc_3.num_jobs                      115                       # Number of jobs
+system.ruby.lcacc_4.num_jobs                      130                       # Number of jobs
+system.ruby.lcacc_5.num_jobs                      139                       # Number of jobs
+system.ruby.lcacc_6.num_jobs                      128                       # Number of jobs
+system.ruby.lcacc_7.num_jobs                      133                       # Number of jobs
+system.ruby.lcacc_0.job_cycles               11487439                       # cycles LCAcc has spent doing jobs
+system.ruby.lcacc_1.job_cycles               11503449                       # cycles LCAcc has spent doing jobs
+system.ruby.lcacc_2.job_cycles               11552703                       # cycles LCAcc has spent doing jobs
+system.ruby.lcacc_3.job_cycles               11500975                       # cycles LCAcc has spent doing jobs
+system.ruby.lcacc_4.job_cycles               11552215                       # cycles LCAcc has spent doing jobs
+system.ruby.lcacc_5.job_cycles               11566531                       # cycles LCAcc has spent doing jobs
+system.ruby.lcacc_6.job_cycles               11526360                       # cycles LCAcc has spent doing jobs
+system.ruby.lcacc_7.job_cycles               11497647                       # cycles LCAcc has spent doing jobs
+system.ruby.lcacc_0.num_tasks                    1904                       # Number of tasks
+system.ruby.lcacc_1.num_tasks                    2112                       # Number of tasks
+system.ruby.lcacc_2.num_tasks                    2048                       # Number of tasks
+system.ruby.lcacc_3.num_tasks                    1840                       # Number of tasks
+system.ruby.lcacc_4.num_tasks                    2080                       # Number of tasks
+system.ruby.lcacc_5.num_tasks                    2224                       # Number of tasks
+system.ruby.lcacc_6.num_tasks                    2048                       # Number of tasks
+system.ruby.lcacc_7.num_tasks                    2128                       # Number of tasks
 system.ruby.lcacc_0.read_cycles              10552672                       # sum up the cycles of all read actions
 system.ruby.lcacc_1.read_cycles              10504436                       # sum up the cycles of all read actions
 system.ruby.lcacc_2.read_cycles              10566154                       # sum up the cycles of all read actions
