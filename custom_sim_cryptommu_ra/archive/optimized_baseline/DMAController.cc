@@ -264,7 +264,8 @@ DMAController::translateTiming(TransferData* td)
       numWriteMisses++;
     }
     //
-
+    
+    misses++;
     mshrhits++;
     BCCMshrhits++;
     td->MAC_ver =0;

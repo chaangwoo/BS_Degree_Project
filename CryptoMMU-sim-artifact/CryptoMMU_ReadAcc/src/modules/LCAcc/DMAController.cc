@@ -419,7 +419,7 @@ DMAController::translateTiming(TransferData* td)
   else if (MSHRs.find(vp_base) != MSHRs.end() && MSHRs[vp_base].size()<8 && MSHRs.size()<8 && td->isRead()) {
       // changed
       numReadMisses++;
-
+      misses++;
       mshrhits++;
       BCCMshrhits++;
       td->MAC_ver =0;
