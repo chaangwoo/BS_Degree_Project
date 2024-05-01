@@ -103,7 +103,7 @@ class TD
   //key process, value <key logical addr, value vector of cfu ids>
   std::map<int, std::map<uint64_t, std::vector<int> > > cfuTlbMisses;
   // changed_non_stalling_mshr
-  //key process, value
+  //key process, value <key logical addr, value vector of cfu ids>
   std::map<int, std::map<uint64_t, std::vector<int> > > cfuTlbMisses_single_0;
   std::map<int, std::map<uint64_t, std::vector<int> > > cfuTlbMisses_single_1;
   //

@@ -562,7 +562,6 @@ TD::MsgHandler(int src, const void* packet, unsigned int packetSize)
       bc.u64[0] = node_id;
       outMsg[8] = bc.u32[0];
       outMsg[9] = bc.u32[1];
-      ML_LOG(GetDeviceName(), "TD sends the msg to the lcacc" << node_id << " with MAC " << MAC);
       if (MAC == 0) {
         // service all requesters
         for (size_t i = 0; i < cfuTlbMisses[process][logicalPage].size(); i++) {
@@ -583,7 +582,6 @@ TD::MsgHandler(int src, const void* packet, unsigned int packetSize)
         for (size_t i = 0; i < cfuTlbMisses_single_0[process][logicalPage].size(); i++) {
           if (cfuTlbMisses_single_0[process][logicalPage][i] != 0) {
             int requester = cfuTlbMisses_single_0[process][logicalPage][i];
-            // assert(requester == node_id);
             netPort->SendMessage(requester, outMsg, sizeof(outMsg),20); // MAC generation after the page walk has finished
           }
         }
@@ -594,7 +592,6 @@ TD::MsgHandler(int src, const void* packet, unsigned int packetSize)
           if (cfuTlbMisses_single_1[process][logicalPage][i] != 0) {
             int requester = cfuTlbMisses_single_1[process][logicalPage][i];
             //std::cout<<"sent to LCAcc" << node_id << "MAC value in TD" << MAC<< std::endl;
-            // assert(requester == node_id);
             netPort->SendMessage(requester, outMsg, sizeof(outMsg)); // Page walk miss in BCC, search latency and memeory access
           }
         }
