@@ -580,23 +580,25 @@ TD::MsgHandler(int src, const void* packet, unsigned int packetSize)
       // changed_non_stalling_mshr
       else if (MAC == 10) {
         // service all requesters
-        for (size_t i = 0; i < cfuTlbMisses_single[process][logicalPage].size(); i++) {
-          if (cfuTlbMisses_single[process][logicalPage][i] != 0) {
-            int requester = cfuTlbMisses_single[process][logicalPage][i];
-            netPort->SendMessage(requester, outMsg, sizeof(outMsg),20); /*MAC generation after the page walk has finished*/
+        for (size_t i = 0; i < cfuTlbMisses_single_0[process][logicalPage].size(); i++) {
+          if (cfuTlbMisses_single_0[process][logicalPage][i] != 0) {
+            int requester = cfuTlbMisses_single_0[process][logicalPage][i];
+            // assert(requester == node_id);
+            netPort->SendMessage(requester, outMsg, sizeof(outMsg),20); // MAC generation after the page walk has finished
           }
         }
-        cfuTlbMisses_single[process].erase(logicalPage);
+        cfuTlbMisses_single_0[process].erase(logicalPage);
       }
       else if (MAC == 11) {
-        for (size_t i = 0; i < cfuTlbMisses_single[process][logicalPage].size(); i++) {
-          if (cfuTlbMisses_single[process][logicalPage][i] != 0) {
-            int requester = cfuTlbMisses_single[process][logicalPage][i];
+        for (size_t i = 0; i < cfuTlbMisses_single_1[process][logicalPage].size(); i++) {
+          if (cfuTlbMisses_single_1[process][logicalPage][i] != 0) {
+            int requester = cfuTlbMisses_single_1[process][logicalPage][i];
             //std::cout<<"sent to LCAcc" << node_id << "MAC value in TD" << MAC<< std::endl;
-            netPort->SendMessage(requester, outMsg, sizeof(outMsg)); /*Page walk miss in BCC, search latency and memeory access*/
+            // assert(requester == node_id);
+            netPort->SendMessage(requester, outMsg, sizeof(outMsg)); // Page walk miss in BCC, search latency and memeory access
           }
         }
-        cfuTlbMisses_single[process].erase(logicalPage);
+        cfuTlbMisses_single_1[process].erase(logicalPage);
       }
       //
       else
@@ -748,8 +750,11 @@ TD::translate(int src, uint64_t vp_base, uint64_t phy_addr, uint64_t MAC, uint64
       misses++;
       // cfuTlbMisses[userProcess][vp_base].push_back(src);
       // changed_non_stalling_mshr
-      if (MAC == 10 || MAC == 11) {
-        cfuTlbMisses_single[userProcess][vp_base].push_back(src);
+      if (MAC == 10) {
+        cfuTlbMisses_single_0[userProcess][vp_base].push_back(src);
+      }
+      else if (MAC == 11) {
+        cfuTlbMisses_single_1[userProcess][vp_base].push_back(src);
       }
       else {
         cfuTlbMisses[userProcess][vp_base].push_back(src);
