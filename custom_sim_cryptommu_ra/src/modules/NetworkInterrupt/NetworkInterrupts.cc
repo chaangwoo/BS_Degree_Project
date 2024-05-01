@@ -305,7 +305,7 @@ void NetworkInterrupts::RecvMessage(int source, const char *buffer, int size)
   Pack the input message with the verfication request set
   in a list and send it to the function start MAC
   */
-    if (MAC == 1)
+    if (MAC == 1 || MAC == 11) // changed_non_stalling_mshr
     {
       MACptr macstruct = new MACstruct;
       // uint32_t buffer[9];
@@ -334,9 +334,15 @@ void NetworkInterrupts::RecvMessage(int source, const char *buffer, int size)
     else
     {
       // Page walk for normal request
+      // changed_non_stalling_mshr
+      // uint64_t pAddr = 0;
+      // uint64_t ver_req = 0;
+      // setupWalk(thread, vAddr, device_id, pAddr, ver_req);
       uint64_t pAddr = 0;
       uint64_t ver_req = 0;
-      setupWalk(thread, vAddr, device_id, pAddr, ver_req);
+      bool isSingle = (MAC == 10) ? true : false;
+      setupWalk(thread, vAddr, device_id, pAddr, ver_req, isSingle);
+      //
     }
   }
   else
@@ -413,7 +419,10 @@ void NetworkInterrupts::SerialMAC(MACptr buffer)
   nih->snpi->SendMessageOnDevice(nih->deviceID, 0, msg, sizeof(msg));
 }
 
-void NetworkInterrupts::setupWalk(int thread, uint64_t vAddr, uint64_t device_id, uint64_t pAddr, uint64_t ver_req)
+// changed_non_stalling_mshr
+// void NetworkInterrupts::setupWalk(int thread, uint64_t vAddr, uint64_t device_id, uint64_t pAddr, uint64_t ver_req)
+void NetworkInterrupts::setupWalk(int thread, uint64_t vAddr, uint64_t device_id, uint64_t pAddr, uint64_t ver_req, bool isSingle)
+//
 {
   RequestPtr req = new Request();
   Request::Flags flags;
@@ -431,6 +440,10 @@ void NetworkInterrupts::setupWalk(int thread, uint64_t vAddr, uint64_t device_id
 
   // ML_LOG(GetDeviceName(), "Receive page table walking req from userthread"
   //     << thread << " on 0x" << std::hex << req->getVaddr());
+  
+  // changed_non_stalling_mshr
+  req->setSingle(isSingle);
+  //
   pendingTranslations.push_back(req);
   walkerstate();
 
@@ -567,7 +580,12 @@ void NetworkInterrupts::finishTranslation(WholeTranslationState *state)
   uint64_t device_id = req->GetdeviceId();
   uint64_t MAC;
   assert(req->hasPaddr());
-  MAC = 0;
+  //MAC = 0;
+  // changed_non_stalling_mshr
+  MAC = req->isSingle() ? 10 : 0;
+  // if (MAC == 10)
+  //   ML_LOG(GetDeviceName(), "Hello from the single request");
+  //
   physicalPage = req->getPaddr();
   int thread = req->taskId();
   uint32_t buffer[12];

@@ -145,9 +145,9 @@ private:
   std::map<uint64_t, std::list<TransferData*> > MSHRs;
   std::map<uint64_t, std::list<TransferData*> > Read_queue;
   std::map<uint64_t, std::list<TransferData*> > Readqueue;
-  // changed3
-  std::queue<TransferData*> waitingReadTransfers;
-  std::queue<TransferData*> waitingWriteTransfers;
+  // changed_non_stalling_mshr
+  std::queue<TransferData*> singleTransfers_10;
+  std::queue<TransferData*> singleTransfers_11;
   //
 
   DMAEngineHandle *dmaDevice;
@@ -211,9 +211,6 @@ protected:
   uint64_t numReadMisses;
   uint64_t numWriteHits;
   uint64_t numWriteMisses;
-  // changed3
-  uint64_t stallCycles;
-  uint64_t lastCallTimeStamp;
 
 public:
   // private TLB entries
@@ -234,8 +231,8 @@ public:
   void beginTranslateTiming(TransferData* td);
 
   // changed3
-  //void translateTiming(TransferData* td);
-  void translateTiming();
+  void translateTiming(TransferData* td);
+  //void translateTiming();
   //
   void ReadAcc(TransferData* td);
 
@@ -245,8 +242,8 @@ public:
 
   typedef Arg1MemberCallback<DMAController, TransferData*, &DMAController::beginTranslateTiming> beginTranslateTimingCB;
   // changed3
-  // typedef MemberCallback1<DMAController, TransferData*, &DMAController::translateTiming> translateTimingCB;
-  typedef MemberCallback0<DMAController, &DMAController::translateTiming> translateTimingCB;
+  typedef MemberCallback1<DMAController, TransferData*, &DMAController::translateTiming> translateTimingCB;
+  // typedef MemberCallback0<DMAController, &DMAController::translateTiming> translateTimingCB;
   //
   typedef MemberCallback1<DMAController, TransferData*, &DMAController::ReadAcc> ReadAccCB;
 
@@ -301,10 +298,10 @@ public:
   {
     return dmaDevice;
   }
-  // changed3
+  // changed_non_stalling_mshr
   uint64_t getStallCycles()
   {
-    return stallCycles;
+    return 0; // does not stall
   }
   //
 };

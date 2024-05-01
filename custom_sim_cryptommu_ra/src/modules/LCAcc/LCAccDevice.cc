@@ -512,10 +512,6 @@ LCAccDevice::RetireAction(Action* a)
       //ML_LOG(GetDeviceName(), "Finish job "
       //       << a->taskID / a->numberOfTasks);
       
-      // changed
-      // writeCycles += SimicsInterface::GetSystemTime() - actionTimeStamp[curAc];
-      // actionTimeStamp.erase(curAc);
-      //
 
       uint32_t msg[2];
       msg[0] = LCACC_CMD_TASK_COMPLETED;
@@ -769,9 +765,9 @@ void LCAccDevice::MsgHandler(int src, const void* packet, unsigned int packetSiz
     bno.u32[1] = msg[9];
     uint64_t node_return = bno.u64[0];
 
-    //ML_LOG(GetDeviceName(), "END TLB miss 0x" << std::hex << vAddr);
-    //ML_LOG(GetDeviceName(), "TLB miss serviced 0x" << std::hex
-    //    << vAddr << " -> 0x" << pAddr);
+    ML_LOG(GetDeviceName(), "END TLB miss 0x" << std::hex << vAddr << std::dec << " with MAC_return " << MAC_return);
+    ML_LOG(GetDeviceName(), "TLB miss serviced 0x" << std::hex
+        << vAddr << " -> 0x" << pAddr);
     dma->finishTranslation(vAddr, pAddr,MAC_return);
   
     
@@ -1259,10 +1255,10 @@ void LCAccDevice::HandleTLBMiss(uint64_t addr, uint64_t MAC_code, uint64_t paddr
   //if(MAC_code==1 || MAC_code==0 )
   
   // changed
-  if (MAC_code == 0) {
+  if (MAC_code == 0 || MAC_code == 10) {
     numHandleTLBMissCall_0++;
   }
-  else if (MAC_code == 1) {
+  else if (MAC_code == 1 || MAC_code == 11) {
     numHandleTLBMissCall_1++;
   }
   else {

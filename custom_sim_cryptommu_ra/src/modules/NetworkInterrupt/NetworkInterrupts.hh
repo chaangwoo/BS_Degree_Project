@@ -206,7 +206,10 @@ public:
 
   void startWalk();
   void walkerstate();
-  void setupWalk(int thread, uint64_t vAddr, uint64_t device_id, uint64_t pAddr, uint64_t ver_req);
+  // changed_non_stalling_mshr
+  // void setupWalk(int thread, uint64_t vAddr, uint64_t device_id, uint64_t pAddr, uint64_t ver_req);
+  void setupWalk(int thread, uint64_t vAddr, uint64_t device_id, uint64_t pAddr, uint64_t ver_req, bool isSingle);
+  //
   void ProtectionTableWalk(int thread, uint64_t vAddr, int ver_req, uint64_t device_id, uint64_t pAddr);
 
   /** This function is used by the page table walker to determin if it could

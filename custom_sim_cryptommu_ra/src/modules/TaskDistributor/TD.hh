@@ -102,6 +102,10 @@ class TD
   std::map<int, int> cfuIndexMap;
   //key process, value <key logical addr, value vector of cfu ids>
   std::map<int, std::map<uint64_t, std::vector<int> > > cfuTlbMisses;
+  // changed_non_stalling_mshr
+  //key process, value
+  std::map<int, std::map<uint64_t, std::vector<int> > > cfuTlbMisses_single;
+  //
   std::map<int, std::map<uint64_t, std::vector<int> > > IOMMUmacreq;
   //key process, value job queue
   std::map<unsigned int, std::queue<JobDescription> > pendingJobSet;

@@ -81,10 +81,6 @@ DMAController::DMAController(NetworkInterface* ni, SPMInterface* spm,
   numReadMisses = 0;
   numWriteHits = 0;
   numWriteMisses = 0;
-  // changed3
-  stallCycles = 0;
-  lastCallTimeStamp = 0;
-  
 }
 
 DMAController::~DMAController()
@@ -105,7 +101,34 @@ DMAController::GetPageAddr(uint64_t addr) const
 void
 DMAController::finishTranslation(uint64_t vp_base, uint64_t pp_base, uint64_t MAC_return)
 {
-  if(MAC_return!=2)
+  // changed_non_stalling_mshr
+  if (MAC_return == 10) // TLB miss and MSHR full; single transfer
+  {
+    assert(singleTransfers_10.size() > 0);
+    ML_LOG(GetDeviceName(), "finishtranslation with MAC 10; queue size: " << singleTransfers_10.size());
+    TransferData* td = singleTransfers_10.front();
+    singleTransfers_10.pop();
+    
+    uint64_t offset = td->getVaddr() % TheISA::PageBytes;
+    td->setPaddr(pp_base + offset);
+    dmaInterface->finishTranslation(dmaDevice, td); 
+    tlbMemory->insert(vp_base, pp_base);
+  }
+  else if (MAC_return == 11) // write hit and MSHR full; single transfer
+  {
+    assert(singleTransfers_11.size() > 0);
+    ML_LOG(GetDeviceName(), "finishtranslation with MAC 11; queue size: " << singleTransfers_11.size());
+    TransferData* td = singleTransfers_11.front();
+    singleTransfers_11.pop();
+    
+    acc_count++;
+    uint64_t offset = td->getVaddr() % TheISA::PageBytes;
+    td->setPaddr(pp_base + offset);
+    dmaInterface->finishTranslation(dmaDevice, td);
+    tlbMemory->insert(vp_base, pp_base);
+  }
+  //
+  else if(MAC_return!=2)
   {
   std::list<TransferData*> &tds = MSHRs[vp_base];
   std::list<TransferData*>::iterator it;
@@ -178,44 +201,15 @@ DMAController::beginTranslateTiming(TransferData* td)
     }
   } else {
     
-    // changed3
-    // SimicsInterface::RegisterCallback(
-    //   translateTimingCB::Create(this, td), hitLatency);
-    td->isRead() ? waitingReadTransfers.push(td)
-                 : waitingWriteTransfers.push(td);
     SimicsInterface::RegisterCallback(
-      translateTimingCB::Create(this), hitLatency);
-    //
+      translateTimingCB::Create(this, td), hitLatency);
   }
 }
 
 void
-// changed3
-//DMAController::translateTiming(TransferData* td)
-DMAController::translateTiming()
-//
+DMAController::translateTiming(TransferData* td)
 {
-  if (GetSystemTime() == lastCallTimeStamp) { // restriction: at most one function call every cycle
-    return;
-  }
-  else { // first call in current cycle
-    lastCallTimeStamp = GetSystemTime();
-  }
-
-  TransferData* td;
-  if (!waitingReadTransfers.empty()) { // Prioritize Read requests
-    td = waitingReadTransfers.front();
-    waitingReadTransfers.pop();
-  }
-  else if (!waitingWriteTransfers.empty()) {
-    td = waitingWriteTransfers.front();
-    waitingWriteTransfers.pop();
-  }
-  else {
-    td = NULL;
-  }
-  assert(td);
-  ML_LOG(GetDeviceName(), "translateTiming; isRead? " << td->isRead());
+  // ML_LOG(GetDeviceName(), "translateTiming; isRead? " << td->isRead());
  
   uint64_t vaddr = td->getVaddr();
   uint64_t vp_base = GetPageAddr(vaddr);
@@ -238,12 +232,6 @@ DMAController::translateTiming()
       if (Read_queue.find(vp_base) != Read_queue.end()) {
         td->MAC_ver =1;
         Read_queue[vp_base].push_back(td);
-        
-        // Call this function again if other transfers are left
-        if (!waitingReadTransfers.empty() || !waitingWriteTransfers.empty()) {
-          SimicsInterface::RegisterCallback(
-            translateTimingCB::Create(this), 1);
-        }
       }
       else {
         td->MAC_ver =1;
@@ -251,13 +239,6 @@ DMAController::translateTiming()
         MAC_dma =2;
         MAC_verfication++;
         //std::cout <<"MAC_verifcation" << hits << std::endl;
-        
-        // Call this function again if other transfers are left
-        if (!waitingReadTransfers.empty() || !waitingWriteTransfers.empty()) {
-          SimicsInterface::RegisterCallback(
-            translateTimingCB::Create(this), 1);
-        }
-        
         onTLBMiss->Call(vp_base, MAC_dma,pp_base); //Overlap reads with access control check for reads
       }
       SimicsInterface::RegisterCallback(
@@ -275,16 +256,17 @@ DMAController::translateTiming()
           
           MSHRs[vp_base].push_back(td);
           // Call this function again if other transfers are left
-          if (!waitingReadTransfers.empty() || !waitingWriteTransfers.empty()) {
-            SimicsInterface::RegisterCallback(
-              translateTimingCB::Create(this), 1);
-          }
         }
-        else { // MSHRs[vp_base] is full; need to stall
-          waitingWriteTransfers.push(td);
-          SimicsInterface::RegisterCallback(
-            translateTimingCB::Create(this), 1);
-          stallCycles++;
+        else { // MSHRs[vp_base] is full;
+          // Process without MSHR allocation
+          numWrites++;
+          hits++;
+          numWriteHits++;
+          
+          MAC_dma = 11;
+          singleTransfers_11.push(td); // to identify 'td' on finishTranslation()
+          ML_LOG(GetDeviceName(), "onTLBMiss call with MAC 11; queue size: " << singleTransfers_11.size());
+          onTLBMiss->Call(vp_base, MAC_dma, pp_base);
         }
       }
       else if (MSHRs.size() < MSHR_SIZE) { // MSHR miss; allocate MSHR entry
@@ -299,18 +281,18 @@ DMAController::translateTiming()
         
         MSHRs[vp_base].push_back(td);
         MAC_dma = 1;
-        // Call this function again if other transfers are left
-        if (!waitingReadTransfers.empty() || !waitingWriteTransfers.empty()) {
-          SimicsInterface::RegisterCallback(
-            translateTimingCB::Create(this), 1);
-        }
         onTLBMiss->Call(vp_base, MAC_dma, pp_base);
       }
-      else { // MSHR full; need to stall
-        waitingWriteTransfers.push(td);
-        SimicsInterface::RegisterCallback(
-          translateTimingCB::Create(this), 1);
-        stallCycles++;
+      else { // MSHR full
+        // Process without MSHR allocation
+        numWrites++;
+        hits++;
+        numWriteHits++;
+        
+        MAC_dma = 11;
+        singleTransfers_11.push(td);
+        ML_LOG(GetDeviceName(), "onTLBMiss call with MAC 11; queue size: " << singleTransfers_11.size());
+        onTLBMiss->Call(vp_base, MAC_dma, pp_base);
       }
     }
   } 
@@ -325,18 +307,19 @@ DMAController::translateTiming()
       td->MAC_ver = 0;
       MAC_dma = 0;
       MSHRs[vp_base].push_back(td);
-      // Call this function again if other transfers are left
-      if (!waitingReadTransfers.empty() || !waitingWriteTransfers.empty()) {
-        SimicsInterface::RegisterCallback(
-          translateTimingCB::Create(this), 1);
-      }
     }
-    else { // MSHRs[vp_base] is full; need to stall
-      td->isRead() ? waitingReadTransfers.push(td)
-                   : waitingWriteTransfers.push(td);
-      SimicsInterface::RegisterCallback(
-        translateTimingCB::Create(this), 1);
-      stallCycles++;
+    else { // MSHRs[vp_base] is full
+      // Process without MSHR allocation
+      td->isRead() ? numReads++ : numWrites++;
+      misses++;
+      td->isRead() ? numReadMisses++ : numWriteMisses++;
+      
+      td->MAC_ver = 0;
+      MAC_dma = 10;
+      pp_base = 0;
+      singleTransfers_10.push(td);
+        ML_LOG(GetDeviceName(), "onTLBMiss call with MAC 10; queue size: " << singleTransfers_10.size());
+      onTLBMiss->Call(vp_base, MAC_dma, pp_base);
     }
   }
 
@@ -354,20 +337,21 @@ DMAController::translateTiming()
     MAC_dma = 0;
     pp_base = 0;
     MSHRs[vp_base].push_back(td);   
-    // Call this function again if other transfers are left
-    if (!waitingReadTransfers.empty() || !waitingWriteTransfers.empty()) {
-      SimicsInterface::RegisterCallback(
-        translateTimingCB::Create(this), 1);
-    }
     onTLBMiss->Call(vp_base, MAC_dma, pp_base);
   }
 
-  else { // private TLB miss; MSHR miss; MSHR is full; need to stall
-    td->isRead() ? waitingReadTransfers.push(td)
-                 : waitingWriteTransfers.push(td);
-    SimicsInterface::RegisterCallback(
-      translateTimingCB::Create(this), 1);
-    stallCycles++;
+  else { // private TLB miss; MSHR miss; MSHR is full
+    // Process without MSHR allocation
+    td->isRead() ? numReads++ : numWrites++;
+    misses++;
+    td->isRead() ? numReadMisses++ : numWriteMisses++;
+    
+    td->MAC_ver = 0;
+    MAC_dma = 10;
+    pp_base = 0;
+    singleTransfers_10.push(td);
+    ML_LOG(GetDeviceName(), "onTLBMiss call with MAC 10; queue size: " << singleTransfers_10.size());
+    onTLBMiss->Call(vp_base, MAC_dma, pp_base);
   }
 }
 

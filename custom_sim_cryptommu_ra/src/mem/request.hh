@@ -261,6 +261,9 @@ class Request
     Addr _pAddr_rand;
     Addr _vAddr_ver;
 
+    // changed_non_stalling_mshr
+    bool _isSingle;
+    //
 
   public:
     /** Minimal constructor.  No fields are initialized.
@@ -443,6 +446,19 @@ class Request
         _paddr = paddr;
         privateFlags.set(VALID_PADDR);
     }
+    
+    // changed_non_stalling_mshr
+    void
+    setSingle(bool b)
+    {
+      _isSingle = b;
+    }
+    bool
+    isSingle()
+    {
+      return _isSingle;
+    }
+    //
 
     /**
      * Generate two requests as if this request had been split into two

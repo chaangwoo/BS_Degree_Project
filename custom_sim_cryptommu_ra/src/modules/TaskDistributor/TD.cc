@@ -377,6 +377,9 @@ TD::MsgHandler(int src, const void* packet, unsigned int packetSize)
 
       for (it = cfuUseMap.begin(); it != cfuUseMap.end(); it++) {
         if (it->second == userProcess) {
+          // changed_non_stalling_mshr
+          // ML_LOG(GetDeviceName(), "cfuUseMap left");
+          //
           allDone = false;
         }
       }
@@ -525,13 +528,13 @@ TD::MsgHandler(int src, const void* packet, unsigned int packetSize)
     uint64_t logicalPage = (logicalAddr / PAGE_SIZE) * PAGE_SIZE;
     assert(physicalAddr % PAGE_SIZE == 0);
     uint64_t physicalPage = (physicalAddr / PAGE_SIZE) * PAGE_SIZE;
-    if(MAC==0)
+    if(MAC==0 || MAC==10) // changed_non_stalling_mshr
     {
       tlb->insert(logicalPage, physicalPage);
     }
     
 
-    if (programSet.find(process) == programSet.end() && MAC==0) {
+    if (programSet.find(process) == programSet.end() && (MAC==0 || MAC==10)) { // changed_non_stalling_mshr
       // no program loaded, thus the miss must be on loading the
       // program
       // insert into TD DMA TLB
@@ -559,6 +562,7 @@ TD::MsgHandler(int src, const void* packet, unsigned int packetSize)
       bc.u64[0] = node_id;
       outMsg[8] = bc.u32[0];
       outMsg[9] = bc.u32[1];
+      ML_LOG(GetDeviceName(), "TD sends the msg to the lcacc" << node_id << " with MAC " << MAC);
       if (MAC == 0) {
         // service all requesters
         for (size_t i = 0; i < cfuTlbMisses[process][logicalPage].size(); i++) {
@@ -572,7 +576,29 @@ TD::MsgHandler(int src, const void* packet, unsigned int packetSize)
 
         cfuTlbMisses[process].erase(logicalPage);
     
-      } 
+      }
+      // changed_non_stalling_mshr
+      else if (MAC == 10) {
+        // service all requesters
+        for (size_t i = 0; i < cfuTlbMisses_single[process][logicalPage].size(); i++) {
+          if (cfuTlbMisses_single[process][logicalPage][i] != 0) {
+            int requester = cfuTlbMisses_single[process][logicalPage][i];
+            netPort->SendMessage(requester, outMsg, sizeof(outMsg),20); /*MAC generation after the page walk has finished*/
+          }
+        }
+        cfuTlbMisses_single[process].erase(logicalPage);
+      }
+      else if (MAC == 11) {
+        for (size_t i = 0; i < cfuTlbMisses_single[process][logicalPage].size(); i++) {
+          if (cfuTlbMisses_single[process][logicalPage][i] != 0) {
+            int requester = cfuTlbMisses_single[process][logicalPage][i];
+            //std::cout<<"sent to LCAcc" << node_id << "MAC value in TD" << MAC<< std::endl;
+            netPort->SendMessage(requester, outMsg, sizeof(outMsg)); /*Page walk miss in BCC, search latency and memeory access*/
+          }
+        }
+        cfuTlbMisses_single[process].erase(logicalPage);
+      }
+      //
       else
       {
 
@@ -720,7 +746,15 @@ TD::translate(int src, uint64_t vp_base, uint64_t phy_addr, uint64_t MAC, uint64
       int core = lastKnownCore[cfuUseMap[src]];
       unsigned int userProcess = cfuUseMap[src];
       misses++;
-      cfuTlbMisses[userProcess][vp_base].push_back(src);
+      // cfuTlbMisses[userProcess][vp_base].push_back(src);
+      // changed_non_stalling_mshr
+      if (MAC == 10 || MAC == 11) {
+        cfuTlbMisses_single[userProcess][vp_base].push_back(src);
+      }
+      else {
+        cfuTlbMisses[userProcess][vp_base].push_back(src);
+      }
+      //
       BitConverter bc;
       uint32_t outMsg[10];
       outMsg[0] = LCACC_CMD_TLB_MISS;
@@ -737,7 +771,7 @@ TD::translate(int src, uint64_t vp_base, uint64_t phy_addr, uint64_t MAC, uint64
       bc.u64[0] = node_id;
       outMsg[8] = bc.u32[0];
       outMsg[9] = bc.u32[1];
-      if(MAC==0)
+      if(MAC==0 || MAC==10) // changed_non_stalling_mshr
           netPort->SendMessage(core, outMsg, sizeof(outMsg));
       else 
           netPort->SendMessage(core, outMsg, sizeof(outMsg),20); /*20 cycles for verification*/
