@@ -234,7 +234,7 @@ DMAController::translateTiming(TransferData* td)
       //
 
       td->MAC_ver =1;
-      // changed2
+      // changed_optimized_baseline
       if (MSHRs.find(vp_base) != MSHRs.end() && MSHRs[vp_base].size()<8 && MSHRs.size()<8) {
         MSHRs[vp_base].push_back(td); // just wait without any execution
       }
@@ -251,11 +251,11 @@ DMAController::translateTiming(TransferData* td)
   } 
   
   
-  // changed2
+  // changed_optimized_baseline
   // else if (MSHRs.find(vp_base) != MSHRs.end() && MSHRs[vp_base].size()<8 && MSHRs.size()<8 && td->isRead()) {
   else if (MSHRs.find(vp_base) != MSHRs.end() && MSHRs[vp_base].size()<8 && MSHRs.size()<8) { // private TLB miss && MSHR hit
   //
-    // changed2
+    // changed_optimized_baseline
     // numReadMisses++;
     if (td->isRead()) {
       numReadMisses++;
