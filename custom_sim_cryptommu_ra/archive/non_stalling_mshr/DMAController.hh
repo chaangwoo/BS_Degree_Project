@@ -5,7 +5,7 @@
 #include <map>
 #include <vector>
 #include <list>
-#include <queue> // changed_stalling_mshr
+#include <queue> // changed3
 #include <string>
 #include "SPMInterface.hh"
 #include "NetworkInterface.hh"
@@ -16,7 +16,7 @@
 namespace LCAcc
 {
 
-// changed_stalling_mshr
+// changed3
 #define MSHR_SIZE 8
 #define MSHR_ENTRY_SIZE 8
 //
@@ -145,9 +145,9 @@ private:
   std::map<uint64_t, std::list<TransferData*> > MSHRs;
   std::map<uint64_t, std::list<TransferData*> > Read_queue;
   std::map<uint64_t, std::list<TransferData*> > Readqueue;
-  // changed_stalling_mshr
-  std::queue<TransferData*> waitingReadTransfers;
-  std::queue<TransferData*> waitingWriteTransfers;
+  // changed_non_stalling_mshr
+  std::queue<TransferData*> singleTransfers_10;
+  std::queue<TransferData*> singleTransfers_11;
   //
 
   DMAEngineHandle *dmaDevice;
@@ -211,9 +211,6 @@ protected:
   uint64_t numReadMisses;
   uint64_t numWriteHits;
   uint64_t numWriteMisses;
-  // changed_stalling_mshr
-  uint64_t stallCycles;
-  uint64_t lastCallTimeStamp;
 
 public:
   // private TLB entries
@@ -233,9 +230,9 @@ public:
 
   void beginTranslateTiming(TransferData* td);
 
-  // changed_stalling_mshr
-  //void translateTiming(TransferData* td);
-  void translateTiming();
+  // changed3
+  void translateTiming(TransferData* td);
+  //void translateTiming();
   //
   void ReadAcc(TransferData* td);
 
@@ -244,9 +241,9 @@ public:
   void flushAll();
 
   typedef Arg1MemberCallback<DMAController, TransferData*, &DMAController::beginTranslateTiming> beginTranslateTimingCB;
-  // changed_stalling_mshr
-  // typedef MemberCallback1<DMAController, TransferData*, &DMAController::translateTiming> translateTimingCB;
-  typedef MemberCallback0<DMAController, &DMAController::translateTiming> translateTimingCB;
+  // changed3
+  typedef MemberCallback1<DMAController, TransferData*, &DMAController::translateTiming> translateTimingCB;
+  // typedef MemberCallback0<DMAController, &DMAController::translateTiming> translateTimingCB;
   //
   typedef MemberCallback1<DMAController, TransferData*, &DMAController::ReadAcc> ReadAccCB;
 
@@ -301,10 +298,10 @@ public:
   {
     return dmaDevice;
   }
-  // changed_stalling_mshr
+  // changed_non_stalling_mshr
   uint64_t getStallCycles()
   {
-    return stallCycles;
+    return 0; // does not stall
   }
   //
 };
