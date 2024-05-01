@@ -105,7 +105,7 @@ DMAController::finishTranslation(uint64_t vp_base, uint64_t pp_base, uint64_t MA
   if (MAC_return == 10) // TLB miss and MSHR full; single transfer
   {
     assert(singleTransfers_10.size() > 0);
-    ML_LOG(GetDeviceName(), "finishtranslation with MAC 10; queue size: " << singleTransfers_10.size());
+    // ML_LOG(GetDeviceName(), "finishtranslation with MAC 10; queue size: " << singleTransfers_10.size());
     TransferData* td = singleTransfers_10.front();
     singleTransfers_10.pop();
     
@@ -117,7 +117,7 @@ DMAController::finishTranslation(uint64_t vp_base, uint64_t pp_base, uint64_t MA
   else if (MAC_return == 11) // write hit and MSHR full; single transfer
   {
     assert(singleTransfers_11.size() > 0);
-    ML_LOG(GetDeviceName(), "finishtranslation with MAC 11; queue size: " << singleTransfers_11.size());
+    // ML_LOG(GetDeviceName(), "finishtranslation with MAC 11; queue size: " << singleTransfers_11.size());
     TransferData* td = singleTransfers_11.front();
     singleTransfers_11.pop();
     
@@ -265,7 +265,7 @@ DMAController::translateTiming(TransferData* td)
           
           MAC_dma = 11;
           singleTransfers_11.push(td); // to identify 'td' on finishTranslation()
-          ML_LOG(GetDeviceName(), "onTLBMiss call with MAC 11; queue size: " << singleTransfers_11.size());
+          // ML_LOG(GetDeviceName(), "onTLBMiss call with MAC 11; queue size: " << singleTransfers_11.size());
           onTLBMiss->Call(vp_base, MAC_dma, pp_base);
         }
       }
@@ -291,7 +291,7 @@ DMAController::translateTiming(TransferData* td)
         
         MAC_dma = 11;
         singleTransfers_11.push(td);
-        ML_LOG(GetDeviceName(), "onTLBMiss call with MAC 11; queue size: " << singleTransfers_11.size());
+        // ML_LOG(GetDeviceName(), "onTLBMiss call with MAC 11; queue size: " << singleTransfers_11.size());
         onTLBMiss->Call(vp_base, MAC_dma, pp_base);
       }
     }
@@ -318,7 +318,7 @@ DMAController::translateTiming(TransferData* td)
       MAC_dma = 10;
       pp_base = 0;
       singleTransfers_10.push(td);
-        ML_LOG(GetDeviceName(), "onTLBMiss call with MAC 10; queue size: " << singleTransfers_10.size());
+        // ML_LOG(GetDeviceName(), "onTLBMiss call with MAC 10; queue size: " << singleTransfers_10.size());
       onTLBMiss->Call(vp_base, MAC_dma, pp_base);
     }
   }
@@ -350,7 +350,7 @@ DMAController::translateTiming(TransferData* td)
     MAC_dma = 10;
     pp_base = 0;
     singleTransfers_10.push(td);
-    ML_LOG(GetDeviceName(), "onTLBMiss call with MAC 10; queue size: " << singleTransfers_10.size());
+    // ML_LOG(GetDeviceName(), "onTLBMiss call with MAC 10; queue size: " << singleTransfers_10.size());
     onTLBMiss->Call(vp_base, MAC_dma, pp_base);
   }
 }
