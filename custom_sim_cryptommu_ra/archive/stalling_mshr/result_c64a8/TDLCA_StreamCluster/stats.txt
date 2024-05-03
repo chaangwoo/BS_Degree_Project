@@ -4,11 +4,11 @@ sim_seconds                                  0.059753                       # Nu
 sim_ticks                                 59753432000                       # Number of ticks simulated
 final_tick                               5235921510500                       # Number of ticks from beginning of simulation (restored from checkpoints and never reset)
 sim_freq                                 1000000000000                       # Frequency of simulated ticks
-host_inst_rate                                  89172                       # Simulator instruction rate (inst/s)
-host_op_rate                                   158644                       # Simulator op (including micro ops) rate (op/s)
-host_tick_rate                              134084598                       # Simulator tick rate (ticks/s)
-host_mem_usage                                4818652                       # Number of bytes of host memory used
-host_seconds                                   445.64                       # Real time elapsed on the host
+host_inst_rate                                  92336                       # Simulator instruction rate (inst/s)
+host_op_rate                                   164273                       # Simulator op (including micro ops) rate (op/s)
+host_tick_rate                              138842372                       # Simulator tick rate (ticks/s)
+host_mem_usage                                4818660                       # Number of bytes of host memory used
+host_seconds                                   430.37                       # Real time elapsed on the host
 sim_insts                                    39738369                       # Number of instructions simulated
 sim_ops                                      70698067                       # Number of ops (including micro ops) simulated
 system.voltage_domain.voltage                       1                       # Voltage in Volts
@@ -2590,44 +2590,44 @@ system.ruby.lcacc_38.tlb_flush                      0
 system.ruby.lcacc_39.tlb_flush                      0                      
 system.ruby.lcacc_0.tlbCycles                  322493                       # Number of cycles LCAcc has spent waiting for tlb
 system.ruby.lcacc_1.tlbCycles                  213397                       # Number of cycles LCAcc has spent waiting for tlb
-system.ruby.lcacc_2.tlbCycles            140557669427950                       # Number of cycles LCAcc has spent waiting for tlb
-system.ruby.lcacc_3.tlbCycles            140557669260870                       # Number of cycles LCAcc has spent waiting for tlb
+system.ruby.lcacc_2.tlbCycles            140176950717166                       # Number of cycles LCAcc has spent waiting for tlb
+system.ruby.lcacc_3.tlbCycles            140176950550086                       # Number of cycles LCAcc has spent waiting for tlb
 system.ruby.lcacc_4.tlbCycles                  117720                       # Number of cycles LCAcc has spent waiting for tlb
 system.ruby.lcacc_5.tlbCycles                       0                       # Number of cycles LCAcc has spent waiting for tlb
 system.ruby.lcacc_6.tlbCycles                  193233                       # Number of cycles LCAcc has spent waiting for tlb
-system.ruby.lcacc_7.tlbCycles                31174264                       # Number of cycles LCAcc has spent waiting for tlb
-system.ruby.lcacc_8.tlbCycles                31014430                       # Number of cycles LCAcc has spent waiting for tlb
-system.ruby.lcacc_9.tlbCycles                30932050                       # Number of cycles LCAcc has spent waiting for tlb
-system.ruby.lcacc_10.tlbCycles               30823160                       # Number of cycles LCAcc has spent waiting for tlb
-system.ruby.lcacc_11.tlbCycles               31039536                       # Number of cycles LCAcc has spent waiting for tlb
-system.ruby.lcacc_12.tlbCycles               31199852                       # Number of cycles LCAcc has spent waiting for tlb
-system.ruby.lcacc_13.tlbCycles               31047599                       # Number of cycles LCAcc has spent waiting for tlb
-system.ruby.lcacc_14.tlbCycles               30941553                       # Number of cycles LCAcc has spent waiting for tlb
-system.ruby.lcacc_15.tlbCycles               30823160                       # Number of cycles LCAcc has spent waiting for tlb
-system.ruby.lcacc_16.tlbCycles               31021586                       # Number of cycles LCAcc has spent waiting for tlb
-system.ruby.lcacc_17.tlbCycles               31158224                       # Number of cycles LCAcc has spent waiting for tlb
-system.ruby.lcacc_18.tlbCycles               31026228                       # Number of cycles LCAcc has spent waiting for tlb
-system.ruby.lcacc_19.tlbCycles               30931925                       # Number of cycles LCAcc has spent waiting for tlb
-system.ruby.lcacc_20.tlbCycles               30823160                       # Number of cycles LCAcc has spent waiting for tlb
-system.ruby.lcacc_21.tlbCycles               31035551                       # Number of cycles LCAcc has spent waiting for tlb
-system.ruby.lcacc_22.tlbCycles               31208222                       # Number of cycles LCAcc has spent waiting for tlb
-system.ruby.lcacc_23.tlbCycles               31043102                       # Number of cycles LCAcc has spent waiting for tlb
-system.ruby.lcacc_24.tlbCycles               30941021                       # Number of cycles LCAcc has spent waiting for tlb
-system.ruby.lcacc_25.tlbCycles               30823160                       # Number of cycles LCAcc has spent waiting for tlb
-system.ruby.lcacc_26.tlbCycles               31020843                       # Number of cycles LCAcc has spent waiting for tlb
-system.ruby.lcacc_27.tlbCycles               31176704                       # Number of cycles LCAcc has spent waiting for tlb
-system.ruby.lcacc_28.tlbCycles               31024949                       # Number of cycles LCAcc has spent waiting for tlb
-system.ruby.lcacc_29.tlbCycles               30930939                       # Number of cycles LCAcc has spent waiting for tlb
-system.ruby.lcacc_30.tlbCycles               30823160                       # Number of cycles LCAcc has spent waiting for tlb
-system.ruby.lcacc_31.tlbCycles               31063481                       # Number of cycles LCAcc has spent waiting for tlb
-system.ruby.lcacc_32.tlbCycles               31216277                       # Number of cycles LCAcc has spent waiting for tlb
-system.ruby.lcacc_33.tlbCycles              375556907                       # Number of cycles LCAcc has spent waiting for tlb
-system.ruby.lcacc_34.tlbCycles              375460958                       # Number of cycles LCAcc has spent waiting for tlb
-system.ruby.lcacc_35.tlbCycles              375318240                       # Number of cycles LCAcc has spent waiting for tlb
-system.ruby.lcacc_36.tlbCycles              375536718                       # Number of cycles LCAcc has spent waiting for tlb
-system.ruby.lcacc_37.tlbCycles              375689499                       # Number of cycles LCAcc has spent waiting for tlb
-system.ruby.lcacc_38.tlbCycles              375546249                       # Number of cycles LCAcc has spent waiting for tlb
-system.ruby.lcacc_39.tlbCycles              375450823                       # Number of cycles LCAcc has spent waiting for tlb
+system.ruby.lcacc_7.tlbCycles                31178360                       # Number of cycles LCAcc has spent waiting for tlb
+system.ruby.lcacc_8.tlbCycles                31018526                       # Number of cycles LCAcc has spent waiting for tlb
+system.ruby.lcacc_9.tlbCycles                30936146                       # Number of cycles LCAcc has spent waiting for tlb
+system.ruby.lcacc_10.tlbCycles               30827256                       # Number of cycles LCAcc has spent waiting for tlb
+system.ruby.lcacc_11.tlbCycles               31043632                       # Number of cycles LCAcc has spent waiting for tlb
+system.ruby.lcacc_12.tlbCycles               31203948                       # Number of cycles LCAcc has spent waiting for tlb
+system.ruby.lcacc_13.tlbCycles               31051695                       # Number of cycles LCAcc has spent waiting for tlb
+system.ruby.lcacc_14.tlbCycles               30945649                       # Number of cycles LCAcc has spent waiting for tlb
+system.ruby.lcacc_15.tlbCycles               30827256                       # Number of cycles LCAcc has spent waiting for tlb
+system.ruby.lcacc_16.tlbCycles               31025682                       # Number of cycles LCAcc has spent waiting for tlb
+system.ruby.lcacc_17.tlbCycles               31162320                       # Number of cycles LCAcc has spent waiting for tlb
+system.ruby.lcacc_18.tlbCycles               31030324                       # Number of cycles LCAcc has spent waiting for tlb
+system.ruby.lcacc_19.tlbCycles               30936021                       # Number of cycles LCAcc has spent waiting for tlb
+system.ruby.lcacc_20.tlbCycles               30827256                       # Number of cycles LCAcc has spent waiting for tlb
+system.ruby.lcacc_21.tlbCycles               31039647                       # Number of cycles LCAcc has spent waiting for tlb
+system.ruby.lcacc_22.tlbCycles               31212318                       # Number of cycles LCAcc has spent waiting for tlb
+system.ruby.lcacc_23.tlbCycles               31047198                       # Number of cycles LCAcc has spent waiting for tlb
+system.ruby.lcacc_24.tlbCycles               30945117                       # Number of cycles LCAcc has spent waiting for tlb
+system.ruby.lcacc_25.tlbCycles               30827256                       # Number of cycles LCAcc has spent waiting for tlb
+system.ruby.lcacc_26.tlbCycles               31024939                       # Number of cycles LCAcc has spent waiting for tlb
+system.ruby.lcacc_27.tlbCycles               31180800                       # Number of cycles LCAcc has spent waiting for tlb
+system.ruby.lcacc_28.tlbCycles               31029045                       # Number of cycles LCAcc has spent waiting for tlb
+system.ruby.lcacc_29.tlbCycles               30935035                       # Number of cycles LCAcc has spent waiting for tlb
+system.ruby.lcacc_30.tlbCycles               30827256                       # Number of cycles LCAcc has spent waiting for tlb
+system.ruby.lcacc_31.tlbCycles               31067577                       # Number of cycles LCAcc has spent waiting for tlb
+system.ruby.lcacc_32.tlbCycles               31220373                       # Number of cycles LCAcc has spent waiting for tlb
+system.ruby.lcacc_33.tlbCycles              363014955                       # Number of cycles LCAcc has spent waiting for tlb
+system.ruby.lcacc_34.tlbCycles              362919006                       # Number of cycles LCAcc has spent waiting for tlb
+system.ruby.lcacc_35.tlbCycles              362776288                       # Number of cycles LCAcc has spent waiting for tlb
+system.ruby.lcacc_36.tlbCycles              362994766                       # Number of cycles LCAcc has spent waiting for tlb
+system.ruby.lcacc_37.tlbCycles              363147547                       # Number of cycles LCAcc has spent waiting for tlb
+system.ruby.lcacc_38.tlbCycles              363004297                       # Number of cycles LCAcc has spent waiting for tlb
+system.ruby.lcacc_39.tlbCycles              362908871                       # Number of cycles LCAcc has spent waiting for tlb
 system.ruby.lcacc_0.dma_reads                    9216                       # Number of read requests from DMA to the host memory
 system.ruby.lcacc_1.dma_reads                   54304                       # Number of read requests from DMA to the host memory
 system.ruby.lcacc_2.dma_reads                    3456                       # Number of read requests from DMA to the host memory

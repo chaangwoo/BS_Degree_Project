@@ -4,11 +4,11 @@ sim_seconds                                  0.096979                       # Nu
 sim_ticks                                 96979464000                       # Number of ticks simulated
 final_tick                               5273147542500                       # Number of ticks from beginning of simulation (restored from checkpoints and never reset)
 sim_freq                                 1000000000000                       # Frequency of simulated ticks
-host_inst_rate                                  47425                       # Simulator instruction rate (inst/s)
-host_op_rate                                    82730                       # Simulator op (including micro ops) rate (op/s)
-host_tick_rate                               98088771                       # Simulator tick rate (ticks/s)
-host_mem_usage                                7860700                       # Number of bytes of host memory used
-host_seconds                                   988.69                       # Real time elapsed on the host
+host_inst_rate                                  31449                       # Simulator instruction rate (inst/s)
+host_op_rate                                    54860                       # Simulator op (including micro ops) rate (op/s)
+host_tick_rate                               65045081                       # Simulator tick rate (ticks/s)
+host_mem_usage                                7860696                       # Number of bytes of host memory used
+host_seconds                                  1490.96                       # Real time elapsed on the host
 sim_insts                                    46888553                       # Number of instructions simulated
 sim_ops                                      81794659                       # Number of ops (including micro ops) simulated
 system.voltage_domain.voltage                       1                       # Voltage in Volts
@@ -2353,14 +2353,14 @@ system.ruby.lcacc_4.tlb_hits                    56420
 system.ruby.lcacc_5.tlb_hits                    54826                      
 system.ruby.lcacc_6.tlb_hits                    72070                      
 system.ruby.lcacc_7.tlb_hits                    70664                      
-system.ruby.lcacc_0.tlb_misses                  90784                      
-system.ruby.lcacc_1.tlb_misses                 103826                      
-system.ruby.lcacc_2.tlb_misses                 109291                      
-system.ruby.lcacc_3.tlb_misses                 111614                      
-system.ruby.lcacc_4.tlb_misses                 134408                      
-system.ruby.lcacc_5.tlb_misses                 132145                      
-system.ruby.lcacc_6.tlb_misses                 169042                      
-system.ruby.lcacc_7.tlb_misses                 166540                      
+system.ruby.lcacc_0.tlb_misses                 201972                      
+system.ruby.lcacc_1.tlb_misses                 231149                      
+system.ruby.lcacc_2.tlb_misses                 242704                      
+system.ruby.lcacc_3.tlb_misses                 247919                      
+system.ruby.lcacc_4.tlb_misses                 298300                      
+system.ruby.lcacc_5.tlb_misses                 292070                      
+system.ruby.lcacc_6.tlb_misses                 373930                      
+system.ruby.lcacc_7.tlb_misses                 367512                      
 system.ruby.lcacc_0.mshrhits                   111188                      
 system.ruby.lcacc_1.mshrhits                   127323                      
 system.ruby.lcacc_2.mshrhits                   133413                      
@@ -2369,14 +2369,14 @@ system.ruby.lcacc_4.mshrhits                   163892
 system.ruby.lcacc_5.mshrhits                   159925                      
 system.ruby.lcacc_6.mshrhits                   204888                      
 system.ruby.lcacc_7.mshrhits                   200972                      
-system.ruby.lcacc_0.tlb_accesses               126172                      
-system.ruby.lcacc_1.tlb_accesses               143941                      
-system.ruby.lcacc_2.tlb_accesses               150891                      
-system.ruby.lcacc_3.tlb_accesses               155823                      
-system.ruby.lcacc_4.tlb_accesses               190828                      
-system.ruby.lcacc_5.tlb_accesses               186971                      
-system.ruby.lcacc_6.tlb_accesses               241112                      
-system.ruby.lcacc_7.tlb_accesses               237204                      
+system.ruby.lcacc_0.tlb_accesses               237360                      
+system.ruby.lcacc_1.tlb_accesses               271264                      
+system.ruby.lcacc_2.tlb_accesses               284304                      
+system.ruby.lcacc_3.tlb_accesses               292128                      
+system.ruby.lcacc_4.tlb_accesses               354720                      
+system.ruby.lcacc_5.tlb_accesses               346896                      
+system.ruby.lcacc_6.tlb_accesses               446000                      
+system.ruby.lcacc_7.tlb_accesses               438176                      
 system.ruby.lcacc_0.tlb_flush                       0                      
 system.ruby.lcacc_1.tlb_flush                       0                      
 system.ruby.lcacc_2.tlb_flush                       0                      

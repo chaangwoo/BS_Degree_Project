@@ -4,11 +4,11 @@ sim_seconds                                  0.130685                       # Nu
 sim_ticks                                130685343500                       # Number of ticks simulated
 final_tick                               5306853422000                       # Number of ticks from beginning of simulation (restored from checkpoints and never reset)
 sim_freq                                 1000000000000                       # Frequency of simulated ticks
-host_inst_rate                                  65208                       # Simulator instruction rate (inst/s)
-host_op_rate                                   112579                       # Simulator op (including micro ops) rate (op/s)
-host_tick_rate                              199553042                       # Simulator tick rate (ticks/s)
-host_mem_usage                                3718620                       # Number of bytes of host memory used
-host_seconds                                   654.89                       # Real time elapsed on the host
+host_inst_rate                                  70482                       # Simulator instruction rate (inst/s)
+host_op_rate                                   121685                       # Simulator op (including micro ops) rate (op/s)
+host_tick_rate                              215693092                       # Simulator tick rate (ticks/s)
+host_mem_usage                                3718624                       # Number of bytes of host memory used
+host_seconds                                   605.89                       # Real time elapsed on the host
 sim_insts                                    42704199                       # Number of instructions simulated
 sim_ops                                      73727213                       # Number of ops (including micro ops) simulated
 system.voltage_domain.voltage                       1                       # Voltage in Volts
@@ -2392,12 +2392,12 @@ system.ruby.lcacc_6.tlb_flush                       0
 system.ruby.lcacc_7.tlb_flush                       0                      
 system.ruby.lcacc_0.tlbCycles                  991578                       # Number of cycles LCAcc has spent waiting for tlb
 system.ruby.lcacc_1.tlbCycles                  959276                       # Number of cycles LCAcc has spent waiting for tlb
-system.ruby.lcacc_2.tlbCycles            139978082670227                       # Number of cycles LCAcc has spent waiting for tlb
-system.ruby.lcacc_3.tlbCycles            139978082655028                       # Number of cycles LCAcc has spent waiting for tlb
+system.ruby.lcacc_2.tlbCycles            139787243112083                       # Number of cycles LCAcc has spent waiting for tlb
+system.ruby.lcacc_3.tlbCycles            139787243096884                       # Number of cycles LCAcc has spent waiting for tlb
 system.ruby.lcacc_4.tlbCycles                  990380                       # Number of cycles LCAcc has spent waiting for tlb
 system.ruby.lcacc_5.tlbCycles                  996356                       # Number of cycles LCAcc has spent waiting for tlb
 system.ruby.lcacc_6.tlbCycles                 1009847                       # Number of cycles LCAcc has spent waiting for tlb
-system.ruby.lcacc_7.tlbCycles                31835268                       # Number of cycles LCAcc has spent waiting for tlb
+system.ruby.lcacc_7.tlbCycles                31839364                       # Number of cycles LCAcc has spent waiting for tlb
 system.ruby.lcacc_0.dma_reads                   59168                       # Number of read requests from DMA to the host memory
 system.ruby.lcacc_1.dma_reads                   59168                       # Number of read requests from DMA to the host memory
 system.ruby.lcacc_2.dma_reads                   59168                       # Number of read requests from DMA to the host memory

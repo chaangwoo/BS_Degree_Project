@@ -4,11 +4,11 @@ sim_seconds                                  0.037980                       # Nu
 sim_ticks                                 37980383000                       # Number of ticks simulated
 final_tick                               5214148461500                       # Number of ticks from beginning of simulation (restored from checkpoints and never reset)
 sim_freq                                 1000000000000                       # Frequency of simulated ticks
-host_inst_rate                                  64807                       # Simulator instruction rate (inst/s)
-host_op_rate                                   116598                       # Simulator op (including micro ops) rate (op/s)
-host_tick_rate                              101570733                       # Simulator tick rate (ticks/s)
+host_inst_rate                                  31890                       # Simulator instruction rate (inst/s)
+host_op_rate                                    57375                       # Simulator op (including micro ops) rate (op/s)
+host_tick_rate                               49980176                       # Simulator tick rate (ticks/s)
 host_mem_usage                                4761048                       # Number of bytes of host memory used
-host_seconds                                   373.93                       # Real time elapsed on the host
+host_seconds                                   759.91                       # Real time elapsed on the host
 sim_insts                                    24233452                       # Number of instructions simulated
 sim_ops                                      43599704                       # Number of ops (including micro ops) simulated
 system.voltage_domain.voltage                       1                       # Voltage in Volts
@@ -2366,30 +2366,30 @@ system.ruby.lcacc_20.tlb_hits                  160228
 system.ruby.lcacc_21.tlb_hits                   17516                      
 system.ruby.lcacc_22.tlb_hits                   22944                      
 system.ruby.lcacc_23.tlb_hits                  164151                      
-system.ruby.lcacc_0.tlb_misses                    369                      
-system.ruby.lcacc_1.tlb_misses                    224                      
-system.ruby.lcacc_2.tlb_misses                    911                      
-system.ruby.lcacc_3.tlb_misses                    366                      
-system.ruby.lcacc_4.tlb_misses                    222                      
-system.ruby.lcacc_5.tlb_misses                    893                      
-system.ruby.lcacc_6.tlb_misses                    405                      
-system.ruby.lcacc_7.tlb_misses                    224                      
-system.ruby.lcacc_8.tlb_misses                    898                      
-system.ruby.lcacc_9.tlb_misses                    405                      
-system.ruby.lcacc_10.tlb_misses                   230                      
-system.ruby.lcacc_11.tlb_misses                   916                      
-system.ruby.lcacc_12.tlb_misses                   343                      
-system.ruby.lcacc_13.tlb_misses                   224                      
-system.ruby.lcacc_14.tlb_misses                   880                      
-system.ruby.lcacc_15.tlb_misses                   369                      
-system.ruby.lcacc_16.tlb_misses                   234                      
-system.ruby.lcacc_17.tlb_misses                   908                      
-system.ruby.lcacc_18.tlb_misses                   348                      
-system.ruby.lcacc_19.tlb_misses                   213                      
-system.ruby.lcacc_20.tlb_misses                   895                      
-system.ruby.lcacc_21.tlb_misses                   333                      
-system.ruby.lcacc_22.tlb_misses                   213                      
-system.ruby.lcacc_23.tlb_misses                   903                      
+system.ruby.lcacc_0.tlb_misses                    537                      
+system.ruby.lcacc_1.tlb_misses                    231                      
+system.ruby.lcacc_2.tlb_misses                   2844                      
+system.ruby.lcacc_3.tlb_misses                    530                      
+system.ruby.lcacc_4.tlb_misses                    229                      
+system.ruby.lcacc_5.tlb_misses                   2736                      
+system.ruby.lcacc_6.tlb_misses                    559                      
+system.ruby.lcacc_7.tlb_misses                    231                      
+system.ruby.lcacc_8.tlb_misses                   2849                      
+system.ruby.lcacc_9.tlb_misses                    547                      
+system.ruby.lcacc_10.tlb_misses                   237                      
+system.ruby.lcacc_11.tlb_misses                  2830                      
+system.ruby.lcacc_12.tlb_misses                   498                      
+system.ruby.lcacc_13.tlb_misses                   231                      
+system.ruby.lcacc_14.tlb_misses                  2802                      
+system.ruby.lcacc_15.tlb_misses                   539                      
+system.ruby.lcacc_16.tlb_misses                   241                      
+system.ruby.lcacc_17.tlb_misses                  2814                      
+system.ruby.lcacc_18.tlb_misses                   540                      
+system.ruby.lcacc_19.tlb_misses                   221                      
+system.ruby.lcacc_20.tlb_misses                  3004                      
+system.ruby.lcacc_21.tlb_misses                   484                      
+system.ruby.lcacc_22.tlb_misses                   220                      
+system.ruby.lcacc_23.tlb_misses                  2977                      
 system.ruby.lcacc_0.mshrhits                      168                      
 system.ruby.lcacc_1.mshrhits                        7                      
 system.ruby.lcacc_2.mshrhits                     1933                      
@@ -2414,30 +2414,30 @@ system.ruby.lcacc_20.mshrhits                    2109
 system.ruby.lcacc_21.mshrhits                     151                      
 system.ruby.lcacc_22.mshrhits                       7                      
 system.ruby.lcacc_23.mshrhits                    2074                      
-system.ruby.lcacc_0.tlb_accesses                17944                      
-system.ruby.lcacc_1.tlb_accesses                24701                      
-system.ruby.lcacc_2.tlb_accesses               177155                      
-system.ruby.lcacc_3.tlb_accesses                18440                      
-system.ruby.lcacc_4.tlb_accesses                24701                      
-system.ruby.lcacc_5.tlb_accesses               185699                      
-system.ruby.lcacc_6.tlb_accesses                18714                      
-system.ruby.lcacc_7.tlb_accesses                24701                      
-system.ruby.lcacc_8.tlb_accesses               177687                      
-system.ruby.lcacc_9.tlb_accesses                18214                      
-system.ruby.lcacc_10.tlb_accesses               26245                      
-system.ruby.lcacc_11.tlb_accesses              182582                      
-system.ruby.lcacc_12.tlb_accesses               18449                      
-system.ruby.lcacc_13.tlb_accesses               24701                      
-system.ruby.lcacc_14.tlb_accesses              174246                      
-system.ruby.lcacc_15.tlb_accesses               18306                      
-system.ruby.lcacc_16.tlb_accesses               26245                      
-system.ruby.lcacc_17.tlb_accesses              189326                      
-system.ruby.lcacc_18.tlb_accesses               17668                      
-system.ruby.lcacc_19.tlb_accesses               23156                      
-system.ruby.lcacc_20.tlb_accesses              161123                      
-system.ruby.lcacc_21.tlb_accesses               17849                      
-system.ruby.lcacc_22.tlb_accesses               23157                      
-system.ruby.lcacc_23.tlb_accesses              165054                      
+system.ruby.lcacc_0.tlb_accesses                18112                      
+system.ruby.lcacc_1.tlb_accesses                24708                      
+system.ruby.lcacc_2.tlb_accesses               179088                      
+system.ruby.lcacc_3.tlb_accesses                18604                      
+system.ruby.lcacc_4.tlb_accesses                24708                      
+system.ruby.lcacc_5.tlb_accesses               187542                      
+system.ruby.lcacc_6.tlb_accesses                18868                      
+system.ruby.lcacc_7.tlb_accesses                24708                      
+system.ruby.lcacc_8.tlb_accesses               179638                      
+system.ruby.lcacc_9.tlb_accesses                18356                      
+system.ruby.lcacc_10.tlb_accesses               26252                      
+system.ruby.lcacc_11.tlb_accesses              184496                      
+system.ruby.lcacc_12.tlb_accesses               18604                      
+system.ruby.lcacc_13.tlb_accesses               24708                      
+system.ruby.lcacc_14.tlb_accesses              176168                      
+system.ruby.lcacc_15.tlb_accesses               18476                      
+system.ruby.lcacc_16.tlb_accesses               26252                      
+system.ruby.lcacc_17.tlb_accesses              191232                      
+system.ruby.lcacc_18.tlb_accesses               17860                      
+system.ruby.lcacc_19.tlb_accesses               23164                      
+system.ruby.lcacc_20.tlb_accesses              163232                      
+system.ruby.lcacc_21.tlb_accesses               18000                      
+system.ruby.lcacc_22.tlb_accesses               23164                      
+system.ruby.lcacc_23.tlb_accesses              167128                      
 system.ruby.lcacc_0.tlb_flush                       0                      
 system.ruby.lcacc_1.tlb_flush                       0                      
 system.ruby.lcacc_2.tlb_flush                       0                      
