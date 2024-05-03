@@ -17,8 +17,8 @@ namespace LCAcc
 {
 
 // changed_stalling_mshr
-#define MSHR_SIZE 8
-#define MSHR_ENTRY_SIZE 8
+#define MSHR_SIZE 0
+#define MSHR_ENTRY_SIZE 0
 //
 
 class TLBEntry

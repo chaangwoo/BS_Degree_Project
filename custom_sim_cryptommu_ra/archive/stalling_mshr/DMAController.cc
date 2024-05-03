@@ -267,7 +267,7 @@ DMAController::translateTiming()
     else { // Write hit
       td->MAC_ver =1;
       if (MSHRs.find(vp_base) != MSHRs.end()) { // MSHR hit
-        if (MSHRs[vp_base].size() < MSHR_ENTRY_SIZE) { // MSHR allocatable
+        if ((MSHR_ENTRY_SIZE == 0) || (MSHRs[vp_base].size() < MSHR_ENTRY_SIZE)) { // MSHR allocatable
           numWrites++;
           hits++;
           numWriteHits++;
@@ -287,7 +287,7 @@ DMAController::translateTiming()
           stallCycles++;
         }
       }
-      else if (MSHRs.size() < MSHR_SIZE) { // MSHR miss; allocate MSHR entry
+      else if ((MSHR_SIZE == 0) || (MSHRs.size() < MSHR_SIZE)) { // MSHR miss; allocate MSHR entry
         numWrites++;
         hits++;
         numWriteHits++;
@@ -316,7 +316,7 @@ DMAController::translateTiming()
   } 
   
   else if (MSHRs.find(vp_base) != MSHRs.end()) { // private TLB miss; MSHR hit
-    if (MSHRs[vp_base].size() < MSHR_ENTRY_SIZE) { // MSHR allocatable
+    if ((MSHR_ENTRY_SIZE == 0) || (MSHRs[vp_base].size() < MSHR_ENTRY_SIZE)) { // MSHR allocatable
       td->isRead() ? numReads++ : numWrites++;
       misses++;
       td->isRead() ? numReadMisses++ : numWriteMisses++;
@@ -340,7 +340,7 @@ DMAController::translateTiming()
     }
   }
 
-  else if (MSHRs.size() < MSHR_SIZE) { // private TLB miss; MSHR miss; allocate MSHR entry
+  else if ((MSHR_SIZE == 0) || (MSHRs.size() < MSHR_SIZE)) { // private TLB miss; MSHR miss; allocate MSHR entry
     td->isRead() ? numReads++ : numWrites++;
     misses++;
     td->isRead() ? numReadMisses++ : numWriteMisses++;
