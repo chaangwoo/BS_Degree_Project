@@ -444,7 +444,9 @@ void NetworkInterrupts::setupWalk(int thread, uint64_t vAddr, uint64_t device_id
   // changed_non_stalling_mshr
   req->setSingle(isSingle);
   //
+  // ML_LOG(GetDeviceName(), "Trying pendingTranslations.push_back(" << req << "); current queue size: " << pendingTranslations.size() * sizeof(RequestPtr));
   pendingTranslations.push_back(req);
+  // ML_LOG(GetDeviceName(), "Push back done.");
   walkerstate();
 
 }

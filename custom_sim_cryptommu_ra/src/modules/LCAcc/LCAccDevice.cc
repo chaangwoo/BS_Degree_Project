@@ -765,9 +765,9 @@ void LCAccDevice::MsgHandler(int src, const void* packet, unsigned int packetSiz
     bno.u32[1] = msg[9];
     uint64_t node_return = bno.u64[0];
 
-    ML_LOG(GetDeviceName(), "END TLB miss 0x" << std::hex << vAddr << std::dec << " with MAC_return " << MAC_return);
-    ML_LOG(GetDeviceName(), "TLB miss serviced 0x" << std::hex
-        << vAddr << " -> 0x" << pAddr);
+    // ML_LOG(GetDeviceName(), "END TLB miss 0x" << std::hex << vAddr << std::dec << " with MAC_return " << MAC_return);
+    // ML_LOG(GetDeviceName(), "TLB miss serviced 0x" << std::hex
+    //    << vAddr << " -> 0x" << pAddr);
     dma->finishTranslation(vAddr, pAddr,MAC_return);
   
     

@@ -748,13 +748,17 @@ TD::translate(int src, uint64_t vp_base, uint64_t phy_addr, uint64_t MAC, uint64
       // cfuTlbMisses[userProcess][vp_base].push_back(src);
       // changed_non_stalling_mshr
       if (MAC == 10) {
+        // ML_LOG(GetDeviceName(), "cfuTlbMisses_single_0[" << userProcess << "][" << vp_base << "].push_back(" << src << ")");
         cfuTlbMisses_single_0[userProcess][vp_base].push_back(src);
       }
       else if (MAC == 11) {
+        // ML_LOG(GetDeviceName(), "cfuTlbMisses_single_1[" << userProcess << "][" << vp_base << "].push_back(" << src << ")");
         cfuTlbMisses_single_1[userProcess][vp_base].push_back(src);
       }
       else {
+        // ML_LOG(GetDeviceName(), "Trying cfuTlbMisses[" << userProcess << "][" << vp_base << "].push_back(" << src << ")");
         cfuTlbMisses[userProcess][vp_base].push_back(src);
+        // ML_LOG(GetDeviceName(), "Push back done.");
       }
       //
       BitConverter bc;

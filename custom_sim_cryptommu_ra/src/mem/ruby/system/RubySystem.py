@@ -52,6 +52,10 @@ class RubySystem(ClockedObject):
 
     num_simics_net_ports = Param.Int(32, "total number of network ports");
     num_acc_instances = Param.Int(1, "number of accelerator instances");
+    # // changed_addOptions
+    mshr_entry = Param.Int(1, "number of entries in the fu's mshr.");
+    mshr_width = Param.Int(1, "the width of each mshr entry; i.e., mshr[vp_base].");
+    # //
     # num_accelerators = Param.Int(2, "number of sub-accelerators in a type");
     num_TDs = Param.Int(1, "total number of taskdistributors");
     visual_trace = Param.String("parade-test/visual.txt",

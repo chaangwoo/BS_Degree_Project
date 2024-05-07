@@ -94,6 +94,10 @@ int RubySystem::m_num_simics_net_ports;
 int RubySystem::m_num_accelerators;
 int RubySystem::m_num_TDs;
 int RubySystem::m_num_acc_instances;
+// changed_addOptions
+int RubySystem::m_mshr_entry;
+int RubySystem::m_mshr_width;
+//
 int RubySystem::m_host_ptw_latency;
 bool RubySystem::m_tlb_hack;
 bool RubySystem::m_ideal_mmu;
@@ -144,6 +148,10 @@ RubySystem::RubySystem(const Params *p)
     // m_num_accelerators = p->num_accelerators;
     m_num_TDs = p->num_TDs;
     m_num_acc_instances = p->num_acc_instances;
+    // changed_addOptions
+    m_mshr_entry = p->mshr_entry;
+    m_mshr_width = p->mshr_width;
+    //
     m_host_ptw_latency = p->host_ptw_latency;
 #endif
 

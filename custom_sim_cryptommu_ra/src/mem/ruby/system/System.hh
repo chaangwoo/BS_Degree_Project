@@ -79,6 +79,10 @@ class RubySystem : public ClockedObject
     static int m_num_simics_net_ports;
     static int m_num_accelerators;
     static int m_num_acc_instances;
+    // changed_addOptions
+    static int m_mshr_entry;
+    static int m_mshr_width;
+    //
     static int m_host_ptw_latency;
     static int m_num_TDs;
     static bool m_cryptommu_serial;
@@ -104,6 +108,10 @@ class RubySystem : public ClockedObject
     static int accIDtoL1CacheID(int accID);
     static int mapPortID(int port);
     static int numberOfAccInstances() { return m_num_acc_instances; }
+    // changed_addOptions
+    static int getMshrEntry() { return m_mshr_entry; }
+    static int getMshrWidth() { return m_mshr_width; }
+    //
     static int getHostPTWLatency() { return m_host_ptw_latency; }
     Network* getNetwork() {assert(m_network != NULL); return m_network;};
 #endif

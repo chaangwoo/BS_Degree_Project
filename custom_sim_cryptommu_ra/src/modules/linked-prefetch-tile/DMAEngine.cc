@@ -373,6 +373,7 @@ DMAEngine::AddSingleTransfer(int srcDevice, uint64_t srcAddr, int dstDevice,
   TransferData* td = new TransferData(srcDevice, srcAddr, dstDevice, dstAddr,
                                       transferSize, priority, GetSystemTime(), buffer, onFinish);
 
+  // ML_LOG("DMAEngine", "waitingTransfers.push(" << td << ")"); // changed_debug
   waitingTransfers.push(td);
 
   if (!scheduled) {
@@ -453,6 +454,7 @@ DMAEngine::finishTranslation(TransferData* td)
                             (td->isRead()) ? td->dstLAddr : td->srcLAddr, requestType);
   }
   if (!isReady) {
+    ML_LOG("DMAEngine", "waitingTransfers.push(" << td << ")"); // changed_debug
     waitingTransfers.push(td);
     return;
   }
