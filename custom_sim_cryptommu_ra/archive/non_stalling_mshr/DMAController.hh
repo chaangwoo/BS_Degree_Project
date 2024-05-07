@@ -16,11 +16,6 @@
 namespace LCAcc
 {
 
-// changed3
-#define MSHR_SIZE 8
-#define MSHR_ENTRY_SIZE 8
-//
-
 class TLBEntry
 {
 public:
@@ -211,6 +206,9 @@ protected:
   uint64_t numReadMisses;
   uint64_t numWriteHits;
   uint64_t numWriteMisses;
+  // changed_addOptions
+  int MSHR_ENTRY;
+  int MSHR_WIDTH;
 
 public:
   // private TLB entries

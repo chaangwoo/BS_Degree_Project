@@ -81,6 +81,9 @@ DMAController::DMAController(NetworkInterface* ni, SPMInterface* spm,
   numReadMisses = 0;
   numWriteHits = 0;
   numWriteMisses = 0;
+  // changed_addOptions
+  MSHR_ENTRY = RubySystem::getMshrEntry();
+  MSHR_WIDTH = RubySystem::getMshrWidth();
 }
 
 DMAController::~DMAController()
@@ -248,7 +251,7 @@ DMAController::translateTiming(TransferData* td)
     else { // Write hit
       td->MAC_ver =1;
       if (MSHRs.find(vp_base) != MSHRs.end()) { // MSHR hit
-        if (MSHRs[vp_base].size() < MSHR_ENTRY_SIZE) { // MSHR allocatable
+        if (MSHRs[vp_base].size() < MSHR_WIDTH) { // MSHR allocatable
           numWrites++;
           hits++;
           numWriteHits++;
@@ -269,7 +272,7 @@ DMAController::translateTiming(TransferData* td)
           onTLBMiss->Call(vp_base, MAC_dma, pp_base);
         }
       }
-      else if (MSHRs.size() < MSHR_SIZE) { // MSHR miss; allocate MSHR entry
+      else if (MSHRs.size() < MSHR_ENTRY) { // MSHR miss; allocate MSHR entry
         numWrites++;
         hits++;
         numWriteHits++;
@@ -298,7 +301,7 @@ DMAController::translateTiming(TransferData* td)
   } 
   
   else if (MSHRs.find(vp_base) != MSHRs.end()) { // private TLB miss; MSHR hit
-    if (MSHRs[vp_base].size() < MSHR_ENTRY_SIZE) { // MSHR allocatable
+    if (MSHRs[vp_base].size() < MSHR_WIDTH) { // MSHR allocatable
       td->isRead() ? numReads++ : numWrites++;
       misses++;
       td->isRead() ? numReadMisses++ : numWriteMisses++;
@@ -323,7 +326,7 @@ DMAController::translateTiming(TransferData* td)
     }
   }
 
-  else if (MSHRs.size() < MSHR_SIZE) { // private TLB miss; MSHR miss; allocate MSHR entry
+  else if (MSHRs.size() < MSHR_ENTRY) { // private TLB miss; MSHR miss; allocate MSHR entry
     td->isRead() ? numReads++ : numWrites++;
     misses++;
     td->isRead() ? numReadMisses++ : numWriteMisses++;

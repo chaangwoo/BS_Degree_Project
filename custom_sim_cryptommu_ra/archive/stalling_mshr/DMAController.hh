@@ -16,11 +16,6 @@
 namespace LCAcc
 {
 
-// changed_stalling_mshr
-#define MSHR_SIZE 0
-#define MSHR_ENTRY_SIZE 0
-//
-
 class TLBEntry
 {
 public:
@@ -214,6 +209,9 @@ protected:
   // changed_stalling_mshr
   uint64_t stallCycles;
   uint64_t lastCallTimeStamp;
+  // changed_addOptions
+  int MSHR_ENTRY;
+  int MSHR_WIDTH;
 
 public:
   // private TLB entries
