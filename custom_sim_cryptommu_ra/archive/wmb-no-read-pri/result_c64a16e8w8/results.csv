@@ -1,0 +1,9 @@
+workload,run_time
+TDLCA_Robot_Localization,2661694
+TDLCA_Segmentation,7384578
+TDLCA_EKF_SLAM,4688137
+TDLCA_Disparity_Map,5283377
+TDLCA_Swaptions,2785901
+TDLCA_StreamCluster,11905872
+TDLCA_Denoise,14351460
+TDLCA_BlackScholes,622727

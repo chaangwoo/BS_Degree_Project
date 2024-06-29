@@ -189,7 +189,7 @@ DMAController::translateTiming(TransferData* td)
   uint64_t offset = vaddr - vp_base;
   uint64_t pp_base;
   uint64_t MAC_dma;
-  ML_LOG(GetDeviceName(), "translateTiming; isRead? " << td->isRead());
+  // ML_LOG(GetDeviceName(), "translateTiming; isRead? " << td->isRead());
 
   // changed
   if (td->isRead()) {
@@ -235,6 +235,7 @@ DMAController::translateTiming(TransferData* td)
 
       td->MAC_ver =1;
       // changed_optimized_baseline
+      /*
       if (MSHRs.find(vp_base) != MSHRs.end() && MSHRs[vp_base].size()<8 && MSHRs.size()<8) {
         MSHRs[vp_base].push_back(td); // just wait without any execution
       }
@@ -243,10 +244,11 @@ DMAController::translateTiming(TransferData* td)
         MAC_dma = 1;
         onTLBMiss->Call(vp_base, MAC_dma, pp_base);
       }
+      */
       //
-      // MSHRs[vp_base].push_back(td);
-      // MAC_dma =1;
-      // onTLBMiss->Call(vp_base, MAC_dma,pp_base);
+      MSHRs[vp_base].push_back(td);
+      MAC_dma =1;
+      onTLBMiss->Call(vp_base, MAC_dma,pp_base);
     }
   } 
   
